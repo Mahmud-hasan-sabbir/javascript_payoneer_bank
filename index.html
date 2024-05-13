@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payoneer Bank</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loginarea">
+        <h1 class="text-center">This is a Payoneer Bank</h1>
+        <div class="submitarea">
+            <h6>Login</h6>
+            <input type="email" class="form-control mt-2" placeholder="Enter your email">
+            <input type="password" name="" placeholder="Enter your Password"  id="" class="form-control mt-2">
+            <button class="btn btn-success btn-sm mt-2" id="loginbtn">submit</button>
+
+        </div>
+
+    </div>
+    <div id="transection-area">
+        <h1 class="text">Transection area</h1>
+       <div class="row">
+        <div class="col-md-4">
+            <div class="deposit">
+                <h5>Deposit</h5>
+                <h2>$ <span id="currentDeposit">00</span></h2>
+            </div>
+          
+        </div>
+        <div class="col-md-4">
+            <div class="withdraw">
+                <h5>Withdrow</h5>
+                <h2>$ <span id="currentwithdraw">00</span></h2>
+            </div>
+        
+        </div>
+        <div class="col-md-4">
+            <div class="Balance">
+                <h5>Balance</h5>
+                <h2>$ <span id="totalBal">00</span></h2>
+            </div>
+        
+        </div>
+       </div>
+
+       <div class="row">
+        <div class="col-md-6 ">
+            <div class="submitarea">
+                <h5>Deposit</h5>
+                <input type="number" id="depositnum" class="form-control mt-2" placeholder="$ amount want your deposit amount">
+                <br>
+                <button class="btn btn-success btn-sm mt-2" id="deposit">Deposit</button>
+            </div>
+           
+        </div>
+        <div class="col-md-6 ">
+            <div class="submitarea">
+            <h5>withdraw</h5>
+            <input type="number" id="withdrawamount" class="form-control mt-2" placeholder=" $ amount want your withdraw amount">
+            <br>
+            <button class="btn btn-success btn-sm mt-2" id="addwithdraw">withdraw</button>
+            </div>
+            
+        </div>
+       </div>
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <script>
+        loginBtn = document.getElementById('loginbtn');
+       
+       
+        loginBtn.addEventListener('click', function(){
+            loginarea = document.getElementById('loginarea');
+            loginarea.style.display = 'none';
+            transection_area = document.getElementById('transection-area');
+            transection_area.style.display = 'block';
+        });
+
+        // deposit event function
+
+        diposit = document.getElementById('deposit');
+
+        diposit.addEventListener('click', function(){
+          
+            var depositAm = addinput("depositnum");
+           spantextvalue('currentDeposit', depositAm);  
+            spantextvalue('totalBal', depositAm);  
+            
+            document.getElementById("depositnum").value = "";
+            
+        });
+
+
+        // withdraw event function
+
+         var addwithdraw = document.getElementById('addwithdraw');
+         addwithdraw.addEventListener('click', function(){
+            var withdrawAmount = addinput('withdrawamount');
+            spantextvalue('currentwithdraw', withdrawAmount); 
+            spantextvalue('totalBal',-1* withdrawAmount); 
+            document.getElementById('withdrawamount').value = '';
+
+         });
+
+
+
+
+           
+         function addinput(id){
+            var amount = document.getElementById(id).value;
+            var amountNumber = parseFloat(amount);
+            return amountNumber;
+         }
+
+        function spantextvalue(id, depositNumber){
+
+            var current = document.getElementById(id).innerText;
+            var currentNUmber = parseFloat(current);
+            var totalamount = depositNumber + currentNUmber;
+            document.getElementById(id).innerText = totalamount;
+
+        }
+    </script>
+
+</body>
+</html>
